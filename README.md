@@ -19,3 +19,6 @@ def main():
 ```
 - Edit `./caption.txt` to edit the caption and edit `./times.txt` to edit how many times to upload
 - drag the video u want to upload to the `script.py` or run `script.py` and paste the video's path
+
+# Help
+open issue in this repo if u encounter any error or problems.
