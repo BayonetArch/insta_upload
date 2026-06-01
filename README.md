@@ -8,7 +8,7 @@ simple script to upload instagram reels 'n' many times
 - no need to do anything except provide username and password in `./script.py`
 
 # Tutorial
-
+- download this repo as zip file and extract it
 - First run the `dependency.bat` to install all dependencies
 - Edit the `username` and `password` field in `./script.py`'s main function
 ```python
