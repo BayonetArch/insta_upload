@@ -40,7 +40,9 @@ def login(username, password):
         try:
             cl.login(username, password)
         except Exception as e:
-            fatal(f"Login failed.\nReason: {e}\ndid u provide correct username and password?")
+            fatal(
+                f"Login failed.\nReason: {e}\ndid u provide correct username and password?"
+            )
 
         cl.dump_settings(session_path)
 
@@ -103,7 +105,13 @@ def get_video():
 
 def upload_reel(cl, path, caption):
     try:
-        cl.clip_upload(path=path, caption=caption)
+        cl.clip_upload(
+            path=path,
+            caption=caption,
+            extra_data={
+                "like_and_view_counts_disabled": 1,
+            },
+        )
     except Exception as e:
         fatal(e)
 
