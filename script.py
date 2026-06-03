@@ -132,6 +132,16 @@ def main():
         temp = Path(tempfile.gettempdir()) / f"varied_{i}.mp4"
         brightness = round(random.uniform(-0.05, 0.05), 3)
         contrast = round(random.uniform(0.95, 1.05), 3)
+        speed = round(random.uniform(0.97, 1.03), 3)
+        crop_x = random.randint(0, 6)
+        crop_y = random.randint(0, 6)
+
+        vf = (
+            f"setpts={1/speed:.4f}*PTS,"
+            f"eq=brightness={brightness}:contrast={contrast},"
+            f"crop=iw-{crop_x}:ih-{crop_y}:0:0,"
+            f"scale=1080:1920"
+        )
 
         subprocess.run(
             [
@@ -143,20 +153,23 @@ def main():
                 "-crf",
                 "18",
                 "-vf",
-                f"eq=brightness={brightness}:contrast={contrast}",
+                vf,
+                "-af",
+                f"atempo={speed}",
                 "-acodec",
                 "aac",
                 str(temp),
                 "-y",
             ]
         )
+
         info(f"Uploading \x1b[0;32m{i+1}/{times}\x1b[0m...")
         upload_reel(cl, temp, caption)
 
         temp.unlink()
 
         if i < times - 1:
-            delay = random.uniform(5, 7)
+            delay = random.uniform(100, 200)
             info(
                 f"Waiting \x1b[0;32m{delay:.1f}\x1b[0m seconds before another upload...."
             )
